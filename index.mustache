@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="fi-FI">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Helsingin leffat</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="stylesheet" type="text/css" href="style.css" media="all">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="enhance.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+	<section>
+		<h1>Helsingin leffat tänään</h1>
+<table id="showtimes">
+<!-- TODO: data attributes should be more semantically represented as <time> -->
+{{#showtimes}}
+<tr data-showtime-hour="{{hour}}" data-showtime-minute="{{minute}}">
+	<td>{{timelabel}}</td>
+	<td><a href="{{url}}" class="{{theaterclass}}">{{title}}</a><small>{{theater}}</small></td>
+</tr>
+{{/showtimes}}
+</table>
+		<footer>Leffalistan sulle duunas <a href="http://viiksipojat.fi">Viiksipojat</a>. Palautteen ja rakkaudentunnustukset voit lähettää tolle <a href="mailto:mikkotron@viiksipojat.fi">Mikolle</a>.</footer>
+	</section>
+</body>
+</html>
