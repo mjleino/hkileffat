@@ -1,8 +1,17 @@
 HKILEFFAT
 =========
 
-TODO: WRITE README
+## Requirements
 
-***
+- Python 2.6 or 2.7
+- [pystache](https://github.com/defunkt/pystache)
 
-While you're waiting, maybe go see [HKILEFFAT in action](http://viiksipojat.fi/leffat/). Yeah!
+## Usage
+
+1. [grab an API key](http://api.omakaupunki.fi/)
+2. paste it into `leffat.conf`
+3. run `python grab-showtimes.py output.html`
+
+## BOOM! SEE IT IN ACTION
+
+[Helsingin leffat tänään](http://viiksipojat.fi/leffat/). Yeah!
