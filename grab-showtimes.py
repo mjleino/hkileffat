@@ -111,8 +111,6 @@ fk_apiroot = "http://www.finnkino.fi/xml/Schedule/?area=1002&dt=" + finnkinoQuer
 response = urllib.urlopen(fk_apiroot)
 dom = parseString(response.read())
 for node in dom.getElementsByTagName("Show"):
-	print node.getElementsByTagName("TheatreAndAuditorium")[0].childNodes[0].data
-	print getFinnkinoTheater(node.getElementsByTagName("TheatreAndAuditorium")[0].childNodes[0].data)
 	DATA["showtimes"].append( {
 		"timelabel": 	showtimeFromTimestring(node.getElementsByTagName("dttmShowStart")[0].childNodes[0].data),
 		"title":		node.getElementsByTagName("Title")[0].childNodes[0].data,
