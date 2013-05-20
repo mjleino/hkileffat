@@ -18,6 +18,7 @@ import json
 import pystache
 import sys
 import urllib
+from email.utils import parsedate
 from xml.dom.minidom import parseString
 
 if len(sys.argv) < 2:
@@ -52,9 +53,20 @@ def showtimeFromTimestring(timestring):
 	d = datetime.datetime.strptime(timestring, "%Y-%m-%dT%H:%M:%S")
 	return zeropad(d.hour) + "." + zeropad(d.minute)
 
-def showtimeFromTimestamp(timestamp):
+def showtimeFromPOSIX(timestamp):
 	"""Returns a '%H.%M' time string from a POSIX timestamp. NB! assumes EST and produces EET (time zone mangling in action)."""
 	return (datetime.datetime.fromtimestamp(timestamp)+tzdelta).strftime("%H.%M")
+
+def showtimeFromRFC2822(timestamp):
+	"""Returns a '%H.%M' time string from a RFC 2822 timestamp."""
+	return (datetime.datetime(*parsedate(timestamp)[0:6])).strftime("%H.%M")
+
+def showtimeFromOK(timestring):
+	"""Returns a '%H.%M' time string from a POSIX timestamp or RFC 2822 timestamp."""
+	if "," in timestring:
+		return showtimeFromRFC2822(timestring)
+	else:
+		return showtimeFromPOSIX(timestring)
 
 def getFinnkinoTheater(t):
 	"""Returns just the name of the theater from Finnkino supplied pile of random data."""
@@ -99,8 +111,10 @@ for theater in ok_theaters:
 	showdata = omakaupunkiData(theater)
 	if showdata != None and len(showdata) != 0:
 		for show in showdata:
+			print show
+			print showtimeFromOK(show["start_time"])
 			DATA["showtimes"].append( {
-				"timelabel": 	showtimeFromTimestamp(show["start_time"]),
+				"timelabel": 	showtimeFromOK(show["start_time"]),
 				"title":     	show["title"],
 				"theater":		theater.replace("+", " ").title(),
 				"url":			show["url"]
