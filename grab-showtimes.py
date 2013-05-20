@@ -111,8 +111,6 @@ for theater in ok_theaters:
 	showdata = omakaupunkiData(theater)
 	if showdata != None and len(showdata) != 0:
 		for show in showdata:
-			print show
-			print showtimeFromOK(show["start_time"])
 			DATA["showtimes"].append( {
 				"timelabel": 	showtimeFromOK(show["start_time"]),
 				"title":     	show["title"],
